@@ -50,7 +50,7 @@ function showStartScreen() {
     <div class="start-screen">
       <h1>Pair 'em Up</h1>
       <div class="author">
-        Created by <a href="https://github.com/your-username" target="_blank">your-username</a>
+        Created by <a href="https://github.com/ypaN73" target="_blank">ypaN73</a>
       </div>
       <div class="mode-selection">
         <button class="mode-btn" data-mode="${GAME_MODES.CLASSIC}">Classic Mode</button>

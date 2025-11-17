@@ -30,7 +30,6 @@ export function loadGameState() {
     if (!saved) return null;
 
     const gameState = JSON.parse(saved);
-    // Проверяем, не устарело ли сохранение (больше 1 дня)
     if (
       gameState.saveTime &&
       Date.now() - gameState.saveTime > 24 * 60 * 60 * 1000
@@ -82,13 +81,11 @@ export function saveResult(result) {
   try {
     const results = loadResults();
 
-    // Добавляем новый результат
     results.unshift({
       ...result,
-      id: Date.now(), // Уникальный ID для сортировки
+      id: Date.now(),
     });
 
-    // Сортируем по времени и оставляем только последние 5
     const limitedResults = results
       .sort((a, b) => b.timestamp - a.timestamp)
       .slice(0, 5);

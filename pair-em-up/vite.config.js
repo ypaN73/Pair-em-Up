@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   root: '.',
-  base: '/your-repo-name/', // ЗАМЕНИТЕ your-repo-name на имя вашего репозитория
+  base: '/Pair-em-Up/',
   server: {
     port: 3000,
     open: true

@@ -3,6 +3,8 @@
 
 A modern, responsive number matching game built with vanilla JavaScript. Match pairs of numbers that are identical or sum to 10 in this addictive puzzle game!
 
+https://ypan73.github.io/Pair-em-Up/
+
 ## 🎯 Features
 
 ### Game Modes

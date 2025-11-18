@@ -7,34 +7,46 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./pair-em-up
 
     steps:
     - name: Checkout
       uses: actions/checkout@v4
+
+    - name: Debug - Check project structure
+      run: |
+        echo "=== Project structure ==="
+        find . -name "package.json" -o -name "vite.config.js" | head -10
 
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
-        cache-dependency-path: './pair-em-up/package-lock.json'
+        cache-dependency-path: 'pair-em-up/package-lock.json'
 
     - name: Install dependencies
-      run: npm ci
+      run: |
+        cd pair-em-up
+        echo "=== Before install ==="
+        ls -la
+        npm ci
 
     - name: Build project
-      run: npm run build
+      run: |
+        cd pair-em-up
+        echo "=== Before build ==="
+        npm run build
+        echo "=== After build ==="
+        ls -la dist/ || echo "dist folder not created"
 
-    - name: Create .nojekyll file
-      run: touch ./pair-em-up/dist/.nojekyll
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
 
-    - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./pair-em-up/dist
-        publish_branch: gh-pages
-        force_orphan: true
+        path: pair-em-up/dist
+
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
